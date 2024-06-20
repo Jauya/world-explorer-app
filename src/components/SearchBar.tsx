@@ -24,7 +24,7 @@ const shuffleArray = (array: Country[]) => {
 export default function SearchBar() {
     const [open, setOpen] = useState(false)
     const [searchTerm, setSearchName] = useState<string>('')
-    const { setCountries, searchCountries, clearFilteredCountries,countries } = useCountriesStore()
+    const { setCountries, searchCountries, clearFilteredCountries,countries,filteredCountries } = useCountriesStore()
     const { data } = useQuery<CountriesData>(GET_COUNTRIES)
     const filterRef = useRef<HTMLDivElement>(null)
     const handleSearchName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +86,9 @@ export default function SearchBar() {
             <div ref={filterRef}>
                 <ContinentsFilter className={[open ? '' : 'hidden'].join(' ')} />
             </div>
+            {filteredCountries.length === 0 && searchTerm.trim() !== '' && (
+                <p className="text-center my-20 text-gray-600 text-xl">No results found for &quot;{searchTerm}&quot;</p>
+            )}
         </div>
     )
 }
