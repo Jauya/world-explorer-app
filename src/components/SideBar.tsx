@@ -3,7 +3,7 @@ import { HiHome, HiBell } from 'react-icons/hi'
 import { HiMiniHeart } from 'react-icons/hi2'
 export default function SideBar() {
     return (
-        <nav className="flex sm:flex-col sm:w-80 sm:p-5 sm:shadow-none shadow bg-card">
+        <nav className="flex sm:flex-col sm:w-80 sm:p-5 sm:shadow-none shadow bg-card max-sm:sticky max-sm:bottom-0">
             <div className="hidden sm:flex justify-center items-center font-medium text-2xl rounded-lg p-5 text-secondary bg-secondary/10 gap-2">
             <img src="/images/logo.png" className='w-16' alt="World Explorer App Logo" />
                 <h1>World Explorer!</h1>

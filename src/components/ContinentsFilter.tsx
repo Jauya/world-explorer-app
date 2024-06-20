@@ -16,7 +16,7 @@ export default function ContinentsFilter({ className }: Props) {
     return (
         <div
             className={[
-                'absolute w-full lgs:h-96 bg-card top-16 rounded-lg p-2 shadow-sm transition-all duration-100 font-bold border border-secondary/50',
+                'absolute w-full lgs:h-96 bg-card top-16 rounded-lg p-3 shadow-sm transition-all duration-100 font-bold flex flex-col gap-2',
                 className,
             ].join(' ')}
         >

@@ -1,5 +1,4 @@
-import { useState, ChangeEvent, useEffect, useRef } from 'react'
-
+import { useState, ChangeEvent, useEffect } from 'react'
 import { Country } from '../graphql/inferfaces'
 import { useCountriesStore } from '../storage/contriesStore'
 import { useQuery } from '@apollo/client'
@@ -11,7 +10,8 @@ import ContinentsFilter from './ContinentsFilter'
 interface CountriesData {
     countries: Country[]
 }
-//Algoritmo de Fisher-Yates (Desordenar el array)
+
+// Algoritmo de Fisher-Yates (Desordenar el array)
 const shuffleArray = (array: Country[]) => {
     const newArray = array.slice()
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -24,9 +24,10 @@ const shuffleArray = (array: Country[]) => {
 export default function SearchBar() {
     const [open, setOpen] = useState(false)
     const [searchTerm, setSearchName] = useState<string>('')
-    const { setCountries, searchCountries, clearFilteredCountries,countries,filteredCountries } = useCountriesStore()
+    const { setCountries, searchCountries, clearFilteredCountries, countries, filteredCountries } =
+        useCountriesStore()
     const { data } = useQuery<CountriesData>(GET_COUNTRIES)
-    const filterRef = useRef<HTMLDivElement>(null)
+
     const handleSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchName(e.target.value)
     }
@@ -36,7 +37,7 @@ export default function SearchBar() {
             const shuffleCountries = shuffleArray(data.countries)
             setCountries(shuffleCountries)
         }
-    }, [data, setCountries,countries])
+    }, [data, setCountries, countries])
 
     useEffect(() => {
         if (searchTerm.trim() !== '') {
@@ -46,22 +47,6 @@ export default function SearchBar() {
         }
     }, [clearFilteredCountries, searchCountries, searchTerm])
 
-    useEffect(() => {
-        if (open) {
-            document.addEventListener('mousedown', handleClickOutside)
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [open])
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-            setOpen(false)
-        }
-    }
     return (
         <div className="flex flex-col sticky top-0 z-40">
             <div className="absolute -top-5 bg-page w-full h-20"></div>
@@ -78,16 +63,22 @@ export default function SearchBar() {
                 </div>
                 <button
                     className="flex justify-center items-center px-4 bg-secondary text-card rounded-lg shadow-sm z-40"
-                    onClick={() => setOpen(true)}
-                >
+                    onClick={() => setOpen(!open)}>
                     <HiAdjustments className="text-2xl" />
                 </button>
             </div>
-            <div ref={filterRef}>
-                <ContinentsFilter className={[open ? '' : 'hidden'].join(' ')} />
+            <div>
+                <ContinentsFilter
+                    className={[
+                        'transition-all duration-100',
+                        open ? '' : 'pointer-events-none opacity-0',
+                    ].join(' ')}
+                />
             </div>
             {filteredCountries.length === 0 && searchTerm.trim() !== '' && (
-                <p className="text-center my-20 text-gray-600 text-xl">No results found for &quot;{searchTerm}&quot;</p>
+                <p className="text-center my-20 text-gray-600 text-xl">
+                    No results found for &quot;{searchTerm}&quot;
+                </p>
             )}
         </div>
     )
