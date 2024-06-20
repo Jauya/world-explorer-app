@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# World Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+World Explorer es una aplicación web desarrollada como parte de un reto técnico. Permite a los usuarios explorar información detallada sobre países utilizando un API GraphQL proporcionado. La interfaz de usuario es responsive y adaptable para ofrecer una experiencia óptima tanto en dispositivos de escritorio como en móviles.
 
-Currently, two official plugins are available:
+## Funcionalidades Implementadas
+- Listado de países con detalles como nombre, capital, idioma y moneda.
+- Búsqueda de países por nombre.
+- Filtrado de países por continente.
+- Visualización de información adicional al hacer clic en un país.
+- Integración de imágenes de cada país obtenidas a través de una API externa (por ejemplo, Pixabay o Unsplash).
+- Routing adecuado para la navegación entre vistas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías Utilizadas
+- Framework: [React](https://reactjs.org/) con TypeScript
+- Manejo de Estado: [Apollo Client](https://www.apollographql.com/docs/react/)
+- Estilos y Diseño: [Tailwind CSS](https://tailwindcss.com/)
+- Cliente HTTP: [Axios](https://axios-http.com/)
+- Hosting: Ejemplo de despliegue en [Netlify](https://www.netlify.com/)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Enlaces Adicionales
+- **Demo desplegada**: [Enlace a la aplicación desplegada](https://world-explorer-o4yqpo4k3-jauyas-projects.vercel.app/)
+- **API GraphQL utilizada**: [https://countries.trevorblades.com/](https://countries.trevorblades.com/)
+- **API de imágenes**: [Pixabay](https://pixabay.com/) (ejemplo)
