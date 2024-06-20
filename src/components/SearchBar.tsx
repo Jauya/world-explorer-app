@@ -24,7 +24,7 @@ const shuffleArray = (array: Country[]) => {
 export default function SearchBar() {
     const [open, setOpen] = useState(false)
     const [searchTerm, setSearchName] = useState<string>('')
-    const { setCountries, searchCountries, clearFilteredCountries } = useCountriesStore()
+    const { setCountries, searchCountries, clearFilteredCountries,countries } = useCountriesStore()
     const { data } = useQuery<CountriesData>(GET_COUNTRIES)
     const filterRef = useRef<HTMLDivElement>(null)
     const handleSearchName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +32,11 @@ export default function SearchBar() {
     }
 
     useEffect(() => {
-        if (data) {
+        if (data && countries.length === 0) {
             const shuffleCountries = shuffleArray(data.countries)
             setCountries(shuffleCountries)
         }
-    }, [data, setCountries])
+    }, [data, setCountries,countries])
 
     useEffect(() => {
         if (searchTerm.trim() !== '') {

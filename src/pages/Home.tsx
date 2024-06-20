@@ -8,14 +8,17 @@ import { Country } from '../graphql/inferfaces'
 export default function Home() {
     const { countries, filteredCountries } = useCountriesStore()
     const [currentItems, setCurrentItems] = useState<Country[]>([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [hasMore, setHasMore] = useState(true)
     const itemsPerPage = 20
     const limitItems = 100
 
     useEffect(() => {
+        if (countries.length == 0) {
+            setLoading(true)
+        }
         setCurrentItems(countries.slice(0, itemsPerPage))
-        setTimeout(() => setLoading(false), 500)
+        setTimeout(() => setLoading(false), 100)
     }, [countries])
 
     const loadMoreItems = () => {
@@ -40,8 +43,7 @@ export default function Home() {
                     className={[
                         'grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 mt-2',
                         loading ? '' : 'hidden',
-                    ].join(' ')}
-                >
+                    ].join(' ')}>
                     {currentItems.map((country) => (
                         <CountryCard key={country.code} country={country} loading={true} />
                     ))}
@@ -58,8 +60,7 @@ export default function Home() {
                     className={[
                         'p-2 text-2xl font-medium',
                         filteredCountries.length == 0 ? '' : 'hidden',
-                    ].join(' ')}
-                >
+                    ].join(' ')}>
                     Most popular
                 </h2>
                 <InfiniteScroll
@@ -69,8 +70,7 @@ export default function Home() {
                     hasMore={hasMore}
                     loader={<h4>Loading...</h4>}
                     endMessage={<p>No more countries to load</p>}
-                    scrollableTarget="infinite-scroll"
-                >
+                    scrollableTarget="infinite-scroll">
                     <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
                         {currentItems.map((country) => (
                             <CountryCard key={country.code} country={country} />

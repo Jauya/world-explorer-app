@@ -31,7 +31,6 @@ export default function CountryCard({ country, loading }: Props) {
 
     const isLiked = countriesLiked.some((c) => c.code === country.code)
     const tags: string[] = hit?.tags ? hit.tags.split(',').map((str) => str.trim()) : ['']
-    const location = `${country.name}, ${country.continent.name}`
 
     const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (showMore && showMoreRef.current && !showMoreRef.current.contains(e.target as Node)) {
@@ -81,9 +80,6 @@ export default function CountryCard({ country, loading }: Props) {
                     <div className="w-full h-full object-cover absolute bg-slate-400/10"></div>
                 </div>
                 <div className="flex flex-col justify-between h-1/3">
-                    <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold">
-                        {`${country.capital || ''} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
-                    </div>
                     <div className="flex font-normal items-center gap-2">
                         <div className="relative flex items-center justify-center">
                             <img
@@ -93,11 +89,15 @@ export default function CountryCard({ country, loading }: Props) {
                             />
                             <div className="rounded-full absolute w-full h-full object-cover bg-slate-800/5"></div>
                         </div>
-                        <div className="w-44">
-                            <span className="block overflow-hidden text-ellipsis whitespace-nowrap">
-                                {location}
-                            </span>
+                        <div className='w-64'>
+                        <div className="block overflow-hidden text-ellipsis whitespace-nowrap font-bold">
+                            {country.name},{' '}
+                            <span className="font-medium">{country.continent.name}</span>
                         </div>
+                        </div>
+                    </div>
+                    <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-600 px-2">
+                        {`${country.capital || ''} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
                     </div>
                 </div>
                 {showMore && (
@@ -124,7 +124,7 @@ export default function CountryCard({ country, loading }: Props) {
                                     {`${country.capital} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
                                 </div>
                                 <ul className="flex flex-col sm:gap-1 gap-3">
-                                    <li className='flex gap-3 sm:gap-1 flex-wrap'>
+                                    <li className="flex gap-3 sm:gap-1 flex-wrap">
                                         <span className="px-2 py-1 rounded-lg bg-page">
                                             Name: {country.name}
                                         </span>
@@ -132,7 +132,7 @@ export default function CountryCard({ country, loading }: Props) {
                                             Capital: {country.capital}
                                         </span>
                                     </li>
-                                    <li className='flex gap-3 sm:gap-1 flex-wrap'>
+                                    <li className="flex gap-3 sm:gap-1 flex-wrap">
                                         <span className="px-2 py-1 rounded-lg bg-page">
                                             Lenguages: {country.languages[0].name}
                                         </span>
@@ -140,7 +140,7 @@ export default function CountryCard({ country, loading }: Props) {
                                             Code: {country.code}
                                         </span>
                                     </li>
-                                    <li className='flex gap-3 sm:gap-1 flex-wrap'>
+                                    <li className="flex gap-3 sm:gap-1 flex-wrap">
                                         <span className="px-2 py-1 rounded-lg bg-page">
                                             Phone: +{country.phones[0]}
                                         </span>
@@ -148,13 +148,18 @@ export default function CountryCard({ country, loading }: Props) {
                                             Currency: {country.currencies[0]}
                                         </span>
                                     </li>
-                                    <li className='flex gap-3 sm:gap-2 flex-wrap mt-2'>
+                                    <li className="flex gap-3 sm:gap-2 flex-wrap mt-2">
                                         {country.states.length > 0 && (
-                                            <span className="   flex flex-wrap gap-2
+                                            <span
+                                                className="   flex flex-wrap gap-2
                                             ">
-                                                <span className='p-1'>States:</span>
-                                                {country.states.slice(0,2).map((state) => (
-                                                    <span className="bg-page px-2 py-1 rounded-lg" key={state.name}>{state.name}</span>
+                                                <span className="p-1">States:</span>
+                                                {country.states.slice(0, 2).map((state) => (
+                                                    <span
+                                                        className="bg-page px-2 py-1 rounded-lg"
+                                                        key={state.name}>
+                                                        {state.name}
+                                                    </span>
                                                 ))}
                                             </span>
                                         )}
@@ -170,7 +175,9 @@ export default function CountryCard({ country, loading }: Props) {
                                         <div className="rounded-full absolute w-full h-full object-cover bg-slate-800/5"></div>
                                     </div>
                                     <div className="">
-                                        <span className="block overflow-hidden">{location}</span>
+                                        <div className="block overflow-hidden text-ellipsis whitespace-nowrap">
+                                            {country.name}, {country.continent.name}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
