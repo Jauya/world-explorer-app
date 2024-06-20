@@ -16,7 +16,7 @@ World Explorer es una aplicación web desarrollada como parte de un reto técnic
 - Manejo de Estado: [Apollo Client](https://www.apollographql.com/docs/react/)
 - Estilos y Diseño: [Tailwind CSS](https://tailwindcss.com/)
 - Cliente HTTP: [Axios](https://axios-http.com/)
-- Hosting: Ejemplo de despliegue en [Netlify](https://www.netlify.com/)
+- Hosting: Despliegue en [Vercel](https://vercel.com/)
 
 ## Enlaces Adicionales
 - **Demo desplegada**: [Enlace a la aplicación desplegada](https://world-explorer-o4yqpo4k3-jauyas-projects.vercel.app/)
