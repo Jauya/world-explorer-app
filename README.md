@@ -21,4 +21,4 @@ World Explorer es una aplicación web desarrollada como parte de un reto técnic
 ## Enlaces Adicionales
 - **Demo desplegada**: [Enlace a la aplicación desplegada](https://world-explorer-app.vercel.app/)
 - **API GraphQL utilizada**: [https://countries.trevorblades.com/](https://countries.trevorblades.com/)
-- **API de imágenes**: [Pixabay](https://pixabay.com/) (ejemplo)
+- **API de imágenes**: [Pixabay](https://pixabay.com/)
