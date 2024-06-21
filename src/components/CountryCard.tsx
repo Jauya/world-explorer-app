@@ -6,6 +6,7 @@ import { HiMiniHeart } from 'react-icons/hi2'
 import { useCountriesStore } from '../storage/contriesStore'
 import { IoArrowBack } from 'react-icons/io5'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
+import noPhoto from '../assets/no-photo.webp'
 interface Props {
     country: Country
 }
@@ -18,7 +19,7 @@ export default function CountryCard({ country }: Props) {
 
     useEffect(() => {
         searchImage({
-            q: `${country.name} ${country.capital}`,
+            q: `${country?.name} ${country?.capital}`,
             category: 'travel',
             image_type: 'photo',
             per_page: 3,
@@ -28,7 +29,7 @@ export default function CountryCard({ country }: Props) {
             .catch((err) => console.log(err))
     }, [country])
 
-    const isLiked = countriesLiked.some((c) => c.code === country.code)
+    const isLiked = countriesLiked.some((c) => c.code === country?.code)
     const tags: string[] = hit?.tags ? hit.tags.split(',').map((str) => str.trim()) : ['']
 
     const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,9 +56,9 @@ export default function CountryCard({ country }: Props) {
                     onClick={() => setShowMore(true)}
                     className="hover:cursor-pointer rounded-lg overflow-hidden w-full aspect-[3/2] relative">
                     <LazyLoadImage
-                        src={hit ? hit.webformatURL : '/images/no-photo.webp'}
+                        src={hit ? hit.webformatURL : noPhoto}
                         className="absolute w-full h-full object-cover"
-                        alt={`${country.name} Photo`}
+                        alt={`${country?.name} Photo`}
                     />
                     <div className="w-full h-full object-cover absolute bg-slate-400/10"></div>
                 </div>
@@ -66,20 +67,20 @@ export default function CountryCard({ country }: Props) {
                         <div className="relative flex items-center justify-center">
                             <LazyLoadImage
                                 className="rounded-full object-cover aspect-square h-8"
-                                src={`https://flagcdn.com/w80/${country.code.toLocaleLowerCase()}.png`}
-                                alt={`${country.name} - ${country.code}`}
+                                src={`https://flagcdn.com/w80/${country?.code.toLocaleLowerCase()}.png`}
+                                alt={`${country?.name} - ${country?.code}`}
                             />
                             <div className="rounded-full absolute w-full h-full object-cover bg-slate-800/5"></div>
                         </div>
                         <div className="xl:w-64 lg:w-60 md:w-44">
                             <div className="block overflow-hidden text-ellipsis whitespace-nowrap font-bold">
-                                {country.name},{' '}
-                                <span className="font-medium">{country.continent.name}</span>
+                                {country?.name},{' '}
+                                <span className="font-medium">{country?.continent.name}</span>
                             </div>
                         </div>
                     </div>
                     <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-600 px-2">
-                        {`${country.capital || ''} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
+                        {`${country?.capital || ''} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
                     </div>
                 </div>
                 {showMore && (
@@ -116,9 +117,9 @@ const InfoCountryCard = ({
         h-full w-full max-sm:rounded-lg rounded-t-lg overflow-hidden sm:bottom-0 sm:right-15 shadow flex flex-col gap-5">
                 <div className=" rounded-lg overflow-hidden w-full h-3/5 aspect-[5/4] relative">
                     <LazyLoadImage
-                        src={hit ? hit.webformatURL : '/images/no-photo.webp'}
+                        src={hit ? hit.webformatURL : noPhoto}
                         className="absolute w-full h-full object-cover"
-                        alt={`${country.name} Photo`}
+                        alt={`${country?.name} Photo`}
                     />
                     <div className="w-full h-full object-cover absolute bg-slate-300/10"></div>
                     <div
@@ -129,40 +130,40 @@ const InfoCountryCard = ({
                 </div>
                 <div className="flex flex-col gap-2 justify-between h-2/5">
                     <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold">
-                        {`${country.capital} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
+                        {`${country?.capital} ${tags[0] !== '' ? `(${tags[0]})` : ''}`}
                     </div>
                     <ul className="flex flex-col sm:gap-1 gap-3">
                         <li className="flex gap-3 sm:gap-1 flex-wrap">
                             <span className="px-2 py-1 rounded-lg bg-page">
-                                Name: {country.name}
+                                Name: {country?.name}
                             </span>
                             <span className="px-2 py-1 rounded-lg bg-page">
-                                Capital: {country.capital}
-                            </span>
-                        </li>
-                        <li className="flex gap-3 sm:gap-1 flex-wrap">
-                            <span className="px-2 py-1 rounded-lg bg-page">
-                                Lenguages: {country.languages[0].name}
-                            </span>
-                            <span className="px-2 py-1 rounded-lg bg-page">
-                                Code: {country.code}
+                                Capital: {country?.capital}
                             </span>
                         </li>
                         <li className="flex gap-3 sm:gap-1 flex-wrap">
                             <span className="px-2 py-1 rounded-lg bg-page">
-                                Phone: +{country.phones[0]}
+                                Lenguages: {country?.languages[0].name}
                             </span>
                             <span className="px-2 py-1 rounded-lg bg-page">
-                                Currency: {country.currencies[0]}
+                                Code: {country?.code}
+                            </span>
+                        </li>
+                        <li className="flex gap-3 sm:gap-1 flex-wrap">
+                            <span className="px-2 py-1 rounded-lg bg-page">
+                                Phone: +{country?.phones[0]}
+                            </span>
+                            <span className="px-2 py-1 rounded-lg bg-page">
+                                Currency: {country?.currencies[0]}
                             </span>
                         </li>
                         <li className="flex gap-3 sm:gap-2 flex-wrap mt-2">
-                            {country.states.length > 0 && (
+                            {country?.states.length > 0 && (
                                 <span
                                     className="   flex flex-wrap gap-2
                         ">
                                     <span className="p-1">States:</span>
-                                    {country.states.slice(0, 2).map((state) => (
+                                    {country?.states.slice(0, 2).map((state) => (
                                         <span
                                             className="bg-page px-2 py-1 rounded-lg"
                                             key={state.name}>
@@ -177,14 +178,14 @@ const InfoCountryCard = ({
                         <div className="relative flex items-center justify-center">
                             <LazyLoadImage
                                 className="rounded-full object-cover aspect-square h-8"
-                                src={`https://flagcdn.com/w80/${country.code.toLocaleLowerCase()}.png`}
-                                alt={`${country.name} - ${country.code}`}
+                                src={`https://flagcdn.com/w80/${country?.code.toLocaleLowerCase()}.png`}
+                                alt={`${country?.name} - ${country?.code}`}
                             />
                             <div className="rounded-full absolute w-full h-full object-cover bg-slate-800/5"></div>
                         </div>
                         <div className="">
                             <div className="block overflow-hidden text-ellipsis whitespace-nowrap">
-                                {country.name}, {country.continent.name}
+                                {country?.name}, {country?.continent.name}
                             </div>
                         </div>
                     </div>

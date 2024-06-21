@@ -4,7 +4,7 @@ import { Hit } from '../services/PixabayInterfaces'
 import { Continent } from '../graphql/inferfaces'
 import { useCountriesStore } from '../storage/contriesStore'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-
+import noPhoto from '../assets/no-photo.webp'
 interface Props {
     continent: Continent
     continentsFilter: string[]
@@ -41,24 +41,21 @@ export default function ContinentCard({ continent, continentsFilter }: Props) {
                 setSelected(!selected)
                 toggleContinentFilter(continent.code)
                 searchCountries('')
-            }}
-        >
+            }}>
             <LazyLoadImage
                 className="w-full h-full"
-                src={hit?.webformatURL ? hit.webformatURL : '/images/no-photo.webp'}
+                src={hit?.webformatURL ? hit.webformatURL : noPhoto}
                 alt={`Image of ${continent.name}`}
             />
             <div
                 className={[
                     'absolute object-cover w-full h-full',
                     selected ? 'bg-slate-700/20 saturate-150' : 'bg-slate-900/50',
-                ].join(' ')}
-            ></div>
+                ].join(' ')}></div>
             <div
                 className={['absolute bottom-0 p-3', selected ? 'text-card' : 'text-gray-300'].join(
                     ' '
-                )}
-            >
+                )}>
                 {continent.name}
             </div>
         </button>

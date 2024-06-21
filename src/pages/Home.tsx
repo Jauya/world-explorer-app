@@ -19,13 +19,8 @@ export default function Home() {
 
     const loadMoreItems = () => {
         if (currentItems.length <= limitItems) {
-            setTimeout(() => {
-                const next = countries.slice(
-                    currentItems.length,
-                    currentItems.length + itemsPerPage
-                )
-                setCurrentItems((prev) => [...prev, ...next])
-            }, 500)
+            const next = countries.slice(currentItems.length, currentItems.length + itemsPerPage)
+            setCurrentItems((prev) => [...prev, ...next])
         } else {
             setHasMore(false)
         }
