@@ -1,4 +1,5 @@
-import CountryCard from '../components/CountryCard'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import CountryCard, { LoadingCountryCard } from '../components/CountryCard'
 import { useCountriesStore } from '../storage/contriesStore'
 
 export default function Liked() {
@@ -10,7 +11,11 @@ export default function Liked() {
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 mt-2">
                     {countriesLiked.length > 0 ? (
                         countriesLiked.map((country) => (
-                            <CountryCard key={country.code} country={country} />
+                            <LazyLoadComponent
+                                placeholder={<LoadingCountryCard />}
+                                key={country.code}>
+                                <CountryCard country={country} />
+                            </LazyLoadComponent>
                         ))
                     ) : (
                         <div className="text-3xl font-medium">Add to see results</div>

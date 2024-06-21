@@ -3,6 +3,7 @@ import { searchImage } from '../services/pixabayService'
 import { Hit } from '../services/PixabayInterfaces'
 import { Continent } from '../graphql/inferfaces'
 import { useCountriesStore } from '../storage/contriesStore'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 interface Props {
     continent: Continent
@@ -42,7 +43,7 @@ export default function ContinentCard({ continent, continentsFilter }: Props) {
                 searchCountries('')
             }}
         >
-            <img
+            <LazyLoadImage
                 className="w-full h-full"
                 src={hit?.webformatURL ? hit.webformatURL : '/images/no-photo.webp'}
                 alt={`Image of ${continent.name}`}
